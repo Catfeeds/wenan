@@ -1,0 +1,12 @@
+.travis.yml
+runtime/*
+.xml
+.log
+.iml
+.idea/
+Test.php
+test.php
+test
+test.js
+/.env
+uploads/*

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {include file="common/meta" /}
+
+        <style type="text/css">
+            body {
+                color:#999;
+                background:url('{$background}');
+                background-size:cover;
+            }
+            a {
+                color:#fff;
+            }
+            .login-panel{margin-top:150px;}
+            .login-screen {
+                max-width:500px;
+                padding:0;
+                margin:100px auto 0 auto;
+
+            }
+            .login-screen .well {
+                border-radius: 3px;
+                -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                background: rgba(255,255,255, 0.2);
+            }
+            .login-screen .well-new {
+                padding: 19px;
+            }
+            .login-screen .copyright {
+                text-align: center;
+            }
+            @media(max-width:767px) {
+                .login-screen {
+                    padding:0 20px;
+                }
+            }
+            .profile-img-card {
+                width: 100px;
+                height: 100px;
+                margin: 10px auto;
+                display: block;
+                -moz-border-radius: 50%;
+                -webkit-border-radius: 50%;
+                border-radius: 50%;
+            }
+            .profile-name-card {
+                text-align: center;
+                font-size: 18px;
+            }
+
+            #forget-form {
+                margin-top:20px;
+            }
+            #forget-form .input-group {
+                margin-bottom:15px;
+            }
+            #forget-password {
+                width: 40%;
+                float: left;
+            }
+            #submit-form {
+                width: 40%;
+                float: right;
+                margin-top: 0px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="login-wrapper">
+                <div class="login-screen">
+                    <div class="well-new">
+                        <div class="forget-form">
+                            <img id="profile-img" class="profile-img-card" src="__CDN__/assets/img/avatar.png" />
+                            <p id="profile-name" class="profile-name-card">问安管理平台</p>
+                            
+                            <form action="" method="post" id="forget-form" class="form-horizontal">
+                                <div id="errtips" class="hide"></div>
+                                {:token()}
+                                <div class="form-group">
+                                    <label for="username" class="control-label col-xs-12 col-sm-2">账户名:</label>
+                                    <div class="col-xs-12 col-sm-7">
+                                        <input type="text" class="form-control" id="username" name="username" value="" data-rule="账户名:required;mobile" />
+                                    </div>
+                                    <div class="col-xs-12 col-sm-3">
+                                        <input type="button" class="form-control" id="send" value="发送验证码" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="captcha" class="control-label col-xs-12 col-sm-2">验证码:</label>
+                                    <div class="col-xs-12 col-sm-7">
+                                        <input type="text" class="form-control" id="captcha" name="captcha" value="" data-rule="验证码:required" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="height:45px;">
+                                    <input type="button" id="goback" style="width: 20%;margin-left: 20%;float: left;" class="btn btn-success btn-lg btn-block" value="返回"/>
+                                    <button type="submit" id="submit-form" style="float: none;margin-left: 52%;width: 20%;" class="btn btn-success btn-lg btn-block">确认登录</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {include file="common/script" /}
+    </body>
+</html>

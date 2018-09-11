@@ -1,0 +1,44 @@
+<form id="edit-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">费用类型:</label>
+        <div class="col-xs-12 col-sm-8" style="padding-top: 7px;">
+            {$row.fee_id_name}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="fee_name" class="control-label col-xs-12 col-sm-2">名称:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="fee_name" name="row[fee_name]" value="{$row.fee_name}" data-rule="required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="price" class="control-label col-xs-12 col-sm-2">价格:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="price" name="row[price]" value="{$row.price}" data-rule="required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">单位:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_select('row[unit]', $unit, $row['unit'], ['class'=>'form-control selectpicker', 'data-rule'=>'required'])}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">启用:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="checkbox" name="row[status]" id="status" value="1" />
+            确认启用
+        </div>
+    </div>
+    <div class="form-group">
+        <div style="margin: 10px 70px 10px 70px;border-top: 1px solid #9c818138;padding-top: 10px;">
+            备注： 启用后不可再做编辑，删除，请考虑清楚确认。
+        </div>
+    </div>
+    <div class="form-group hidden layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8" style="text-align: center;">
+            <button type="submit" class="btn btn-success btn-embossed disabled">确认启用</button>
+        </div>
+    </div>
+</form>

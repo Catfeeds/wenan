@@ -1,0 +1,27 @@
+<form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">预约间隔/分钟:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="appoint_interval" name="appoint_interval" value="<?php echo $interval ?: 5; ?>" data-rule="required;" readonly="readonly" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div style="margin: 10px 70px 10px 70px;border-top: 1px solid #9c818138;padding-top: 10px;">
+            <a class="interval btn btn-success" op="" time="5">5分钟</a>
+            <a class="interval btn btn-success" op="" time="30" style="margin-left:5px;">半小时</a>
+            <a class="interval btn btn-success" op="" time="60" style="margin-left:5px;">1小时</a>
+            <a class="interval btn btn-success" op="" time="720" style="margin-left:5px;">半天</a>
+            <a class="interval btn btn-success" op="" time="1440" style="margin-left:5px;">一天</a>
+            <a class="interval btn btn-success" op="+" time="5" style="margin-left:5px;">加5分钟</a>
+            <a class="interval btn btn-success" op="-" time="5" style="margin-left:5px;">减5分钟</a>
+            <a class="interval btn btn-success" op="+" time="60" style="margin-left:5px;">加1小时</a>
+            <a class="interval btn btn-success" op="-" time="60" style="margin-left:5px;">减1小时</a>
+        </div>
+    </div>
+    <div class="form-group hidden layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8" style="text-align: center;">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+        </div>
+    </div>
+</form>

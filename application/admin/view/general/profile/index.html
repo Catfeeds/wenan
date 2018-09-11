@@ -1,0 +1,129 @@
+<style>
+    .profile-avatar-container {
+        position:relative;
+        width:100px;margin:0 auto;
+    }
+    .profile-avatar-container .profile-user-img{
+        width:100px;
+        height:100px;
+    }
+    .profile-avatar-container .profile-avatar-text {
+        display:none;
+    }
+    .profile-avatar-container:hover .profile-avatar-text {
+        display:block;
+        position:absolute;
+        height:100px;
+        width:100px;
+        background:#444;
+        opacity: .6;
+        color: #fff;
+        top:0;
+        left:0;
+        line-height: 100px;
+        text-align: center;
+    }
+    .profile-avatar-container button{
+        position:absolute;
+        top:0;left:0;width:100px;height:100px;opacity: 0;
+    }
+    .modify-password,.modify-telphone{width: 80px;}
+    .form-group>label:nth-child(1){text-align: left;}
+</style>
+<div class="row animated fadeInRight">
+    <div class="col-md-4">
+        <div class="box box-success">
+            <div class="panel-heading">
+                <!--{:__('Profile')}-->
+                {$admin.username}，欢迎登录使用
+            </div>
+            <div class="panel-body">
+
+                <form class="form-horizontal" id="update-form" role="form" data-toggle="validator" method="POST" action="{:url('general.profile/update')}">
+                    <input type="hidden" id="c-avatar" name="row[avatar]" value="{$admin.avatar}" />
+                    <div class="box-body box-profile">
+                        
+                        <div class="profile-avatar-container">
+                            <img class="profile-user-img img-responsive img-circle plupload" src="__CDN__{$admin.avatar}" alt="">
+                            <div class="profile-avatar-text img-circle">{:__('Click to edit')}</div>
+                            <button id="plupload-avatar" class="plupload" data-input-id="c-avatar"><i class="fa fa-upload"></i> {:__('Upload')}</button>
+                        </div>
+                        
+                        <h3 class="profile-username text-center">{$admin.username}</h3>
+
+                        <p class="text-muted text-center">{$admin.email}</p>
+
+                        <div class="form-group col-sm-12">
+                            <label for="c-group_name" class="control-label col-xs-12 col-sm-4">账号身份 :</label>
+                            <div class="col-xs-12 col-sm-4">
+                                <label class="control-label">{$row.group_name?$row.group_name:""}</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label for="c-phone" class="control-label col-xs-12 col-sm-4">修改手机号 :</label>
+                            <div class="col-xs-12 col-sm-4">
+                                <label class="control-label">{$admin.phone}</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <input class="btn btn-success btn-sm modify-telphone" value="修改手机号" />
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label for="c-password" class="control-label col-xs-12 col-sm-4">密码 :</label>
+                            <div class="col-xs-12 col-sm-4">
+                                <label class="control-label">******</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <input class="btn btn-success btn-sm modify-password" value="修改密码" />
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label for="c-hos_name" class="control-label col-xs-12 col-sm-4">所属门店 :</label>
+                            <div class="col-xs-12 col-sm-4">
+                                <label class="control-label">{$row.hos_name?$row.hos_name:""}</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label for="c-createtime" class="control-label col-xs-12 col-sm-4">创建日期 :</label>
+                            <div class="col-xs-12 col-sm-4">
+                                <label class="control-label">{:date('Y-m-d',$admin.createtime)}</label>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<button type="submit" class="btn btn-success">{:__('Submit')}</button>-->
+                            <!--<button type="reset" class="btn btn-default">{:__('Reset')}</button>-->
+                        <!--</div>-->
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!--<div class="col-md-8">-->
+        <!--<div class="panel panel-default panel-intro panel-nav">-->
+            <!--<div class="panel-heading">-->
+                <!--<ul class="nav nav-tabs">-->
+                    <!--<li class="active"><a href="#one" data-toggle="tab"><i class="fa fa-list"></i> {:__('Admin log')}</a></li>-->
+                <!--</ul>-->
+            <!--</div>-->
+            <!--<div class="panel-body">-->
+                <!--<div id="myTabContent" class="tab-content">-->
+                    <!--<div class="tab-pane fade active in" id="one">-->
+                        <!--<div class="widget-body no-padding">-->
+                            <!--<div id="toolbar" class="toolbar">-->
+                                <!--{:build_toolbar('refresh')}-->
+                            <!--</div>-->
+                            <!--<table id="table" class="table table-striped table-bordered table-hover" width="100%">-->
+
+                            <!--</table>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+
+    <!--</div>-->
+</div>

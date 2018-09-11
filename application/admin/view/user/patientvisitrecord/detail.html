@@ -1,0 +1,135 @@
+<style>
+    .table>tbody>tr>td:nth-child(1){padding-left:50px;}
+    .table>tbody>tr>td.title{padding-left:8px;font-size: 12px;font-weight: bold;}
+    .title span{padding: 0 10px;}
+</style>
+<table class="table">
+    <tbody>
+        <tr>
+            <td class="title"><i class="fa fa-user"></i><span>{$row.name}</span></td>
+            <td>{$row.gender} {$row.age}<i class="fa fa-shopping-bag" style="float: right"></i></td>
+        </tr>
+        <tr>
+            <td>病历号</td>
+            <td>{$row.medical_record_number}</td>
+        </tr>
+        <tr>
+            <td>手机号</td>
+            <td>{:$auth->check('user/patientvisitrecord/privacy') ? $row.member.telphone : substr($row.member.telphone,0,3).'****'.substr($row.member.telphone,7)}</td>
+        </tr>
+        <tr>
+            <td>家庭住址</td>
+            <td>{:$auth->check('user/patientvisitrecord/privacy')?$row.home_address:"******"}</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="button-nav">
+                    <a href="/admin/user/Patientinmembercase/index/patientInMemberId/{$row.patient_in_member_id}/chooseBtn/2/patientId/{$row.id}" class="btn btn-success btn-sm">病例记录</a>
+                    <a href="/admin/user/Patientinmembercase/add/patientInMemberId/{$row.patient_in_member_id}/chooseBtn/2/patientId/{$row.id}" class="btn btn-success btn-sm {if $row.member.status != 1}disabled{/if}">新增病例</a>
+                    <a href="/admin/user/Patientreturnrecord/add/patientInMemberId/{$row.patient_in_member_id}/chooseBtn/2/patientId/{$row.id}" class="btn btn-success btn-sm {if $row.member.status != 1}disabled{/if}">新增回访</a>
+                    <a href="javascript:;" class="btn btn-success btn-sm btn-appointment {if $row.member.status != 1}disabled{/if}" addtabs = "96" patient_in_member_id ={$row.patient_in_member_id}>预约</a>
+                    {present name="row.register"}
+                    <a href="javascript:;" class="btn btn-success btn-sm btn-register {if $row.member.status != 1}disabled{/if}" addtabs="90" patient_in_member_id ={$row.patient_in_member_id}>挂号</a>
+                    {else /}
+                    <a href="javascript:;" class="btn btn-success btn-sm btn-appointment-confirm {if $row.member.status != 1}disabled{/if}" appointment_id ={$row.appointment.id}>确认预约</a>
+                    {/present}
+                    {if $auth->check('user/chargeinfo/add')}
+                    <a href="/admin/user/chargeinfo/add/patientInMemberId/{$row.patient_in_member_id}/patientId/{$row.id}" class="btn btn-success btn-sm {if $row.member.status != 1}disabled{/if}">新增收费</a>
+                    {/if}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"  class="title"><i class="fa fa-id-card"></i><span>挂号详情</span></td>
+        </tr>
+        {present name="row.register"}
+        <tr>
+            <td>医生</td>
+            <td>{$row.register.doctor_name}</td>
+        </tr>
+        <tr>
+            <td>就诊类型</td>
+            <td>{$systemDic['TREATMENT_TYPE'][$row.register.treatment_type]}</td>
+        </tr>
+        <tr>
+            <td>就诊科室</td>
+            <td>{$systemDic['DEPARTMENT'][$row.register.treatment_department]}</td>
+        </tr>
+        <tr>
+            <td>挂号时间</td>
+            <td>{:date('Y-m-d H:i',$row.register.createtime)}</td>
+        </tr>
+        {else /}
+        <tr>
+            <td colspan="2">暂无挂号信息</td>
+        </tr>
+        {/present}
+        <tr>
+            <td colspan = '2'  class="title"><i class="fa fa-clock-o"></i><span>预约详情</span></td>
+        </tr>
+        {present name="row.appointment"}
+        <tr>
+            <td>医生</td>
+            <td>{$row.appointment.doctor_name}</td>
+        </tr>
+        <tr>
+            <td>就诊项目</td>
+            <td>{$systemDic['PROJECT_TYPE'][$row.appointment.project_type]}</td>
+        </tr>
+        <tr>
+            <td>预约时间</td>
+            <td>{:date('Y-m-d',$row.appointment.start_time)}  {:date('H:i',$row.appointment.start_time)} - {:date('H:i',$row.appointment.end_time)}</td>
+        </tr>
+        <tr>
+            <td>预约人</td>
+            <td>{$row.appointment.name}</td>
+        </tr>
+        {else /}
+        <tr>
+            <td colspan = '2'>暂无预约信息</td>
+        </tr>
+        {/present}
+        <tr>
+            <td  class="title"><i class="fa fa-calendar-check-o"></i><span>就诊状态</span></td>
+            <td>{$systemDic['MEDICAL_STATUS'][$row.medical_status]}</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="title"><i class="fa fa-dollar"></i><span>收费信息</span></td>
+        </tr>
+        {present name = "row.chargeInfo.0"}
+        {foreach $row.chargeInfo as $vo}
+        <tr>
+            <td>
+                <div class="pay-info">
+                    <span>{:date('Y-m-d',$vo.createtime)}</span>
+                    <span style="padding-left: 20px;"><i class="fa fa-yen"></i> 应付款:</span>
+                    <span>{$vo.should_pay}</span>
+                    <span style="padding-left: 20px;"><i class="fa fa-yen"></i> 已付款:</span>
+                    <span>{$vo.already_paid}</span>
+                </div>
+            </td>
+            <td>
+                {if condition="$row.member.status neq 1"}
+                <button class="btn btn-default btn-xs btn-pay" disabled>已禁用</button>
+                {else /}
+                <button class="btn btn-success btn-xs btn-pay {$vo.already_paid > 0 ? 'hidden':''}" {$vo.already_paid > 0 ? 'disabled hidden':''} chargeInfo ={$vo}>付款</button>
+                {/if}          
+            </td>
+        </tr>
+        {/foreach}
+        {else /}
+        <tr colspan = '2'>
+            <td>暂无收费信息</td>
+        </tr>
+        {/present}
+    </tbody>
+</table>
+<div class="hide layer-footer">
+    <label class="control-label col-xs-12 col-sm-2"></label>
+    <div class="col-xs-12 col-sm-8">
+        <button type="reset" class="btn btn-primary btn-embossed btn-close" onclick="Layer.closeAll();">{:__('Close')}</button>
+    </div>
+</div>
+
+<!--付款弹框-->
+{include file="user/chargeinfo/paytpl"/}

@@ -1,0 +1,34 @@
+<form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+
+    <div class="form-group">
+        <label for="c-patient_visit_record_id" class="control-label col-xs-12 col-sm-2">{:__('patient_visit_record_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-patient_visit_record_id" data-rule="required" data-source="patientvisitrecord/index" class="form-control selectpage" name="row[patient_visit_record_id]" type="text" value="{$row.patient_visit_record_id}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-doctor_name" class="control-label col-xs-12 col-sm-2">{:__('Doctor_name')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-doctor_name" data-rule="required" class="form-control" name="row[doctor_name]" type="text" value="{$row.doctor_name}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-treatment_type" class="control-label col-xs-12 col-sm-2">{:__('Treatment_type')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-treatment_type" data-rule="required" class="form-control" name="row[treatment_type]" type="text" value="{$row.treatment_type}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-treatment_department" class="control-label col-xs-12 col-sm-2">{:__('Treatment_department')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-treatment_department" data-rule="required" class="form-control" name="row[treatment_department]" type="number" value="{$row.treatment_department}">
+        </div>
+    </div>
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

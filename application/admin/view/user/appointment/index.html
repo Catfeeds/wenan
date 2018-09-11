@@ -1,0 +1,124 @@
+<style>
+    /*预约信息弹框开始*/
+    .top{overflow: hidden;}
+    .middle{margin: 10px 0;}
+    .top_left{float: left;}
+    .top_right{float: right;}
+    .name{padding-right: 10px;font-size: 14px;font-weight: bold;}
+    /*预约信息弹框结束*/
+
+    /*预约事件点击弹框开始*/
+    .layui-layer-fast .layui-layer-btn .layui-layer-btn0 ,
+    .layui-layer-fast .layui-layer-btn .layui-layer-btn1,
+    .layui-layer-fast .layui-layer-btn .layui-layer-btn2{
+        background-color: #18bc9c!important;
+        border-color: #18bc9c!important;
+    }
+
+    .layui-layer-lan .layui-layer-btn a{pointer-events:none}
+    .layui-layer-lan .layui-layer-btn:hover{cursor:not-allowed;}
+    .layui-layer-lan .layui-layer-btn .layui-layer-btn0,
+    .layui-layer-lan .layui-layer-btn .layui-layer-btn1,
+    .layui-layer-lan .layui-layer-btn .layui-layer-btn2{background-color:#95a5a6!important;border-color: #95a5a6!important;}
+    /*.layui-layer-lan .layui-layer-btn .layui-layer-btn1{background:#95a5a6;}*/
+    /*预约事件点击弹框结束*/
+
+    /*fullcalendar*/
+    .fc-highlight {background: #bce8f1; opacity: 1; }/* when user is selecting cells */
+    /*fullcalendar*/
+
+    #unConfirmNum label{float: right;color: red;height:46px;line-height: 46px;font-size: 16px;}
+
+</style>
+<div class="row">
+    <div class="col-md-1 col-sm-1">
+        <div class="box box-solid" style="position: fixed;z-index: 10;width: 7%;">
+            <div class="box-header with-border">
+                <span class="">拖拽事件</span>
+            </div>
+            <div class="box-body">
+                <!-- the events -->
+                <div id="external-events">
+                    <div class="external-event bg-green">预约</div>
+                    <div class="external-event bg-yellow">占用</div>
+                    <!--<div class="external-event bg-aqua">Do homework</div>-->
+                    <!--<div class="external-event bg-light-blue">Work on UI design</div>-->
+                    <!--<div class="external-event bg-red">Sleep tight</div>-->
+                    <!--<div class="checkbox">-->
+                        <!--<label for="drop-remove">-->
+                            <!--<input type="checkbox" id="drop-remove">-->
+                            <!--拖拽删除事件-->
+                        <!--</label>-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+    <div class="col-md-11 col-sm-11">
+        <div class="panel panel-default panel-intro">
+            <!--{:build_heading()}-->
+            <div class="panel-body">
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade active in" id="one">
+                        <div class="widget-body no-padding">
+                            <div id="toolbar" class="toolbar">
+                                <div class="row">
+                                    <div class="col-md-2 hide">
+                                        <button href="javascript:;" class="btn btn-success btn-add-appointment">新增预约</button>
+                                    </div>
+                                    <div class="col-md-10 col-sm-10">
+                                        <form class="form-horizontal form-commonsearch" action="">
+                                            <fieldset>
+                                                <div class="row">
+                                                    <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                                        <label for="c-doctor_id"
+                                                               class="control-label col-xs-4">医生</label>
+                                                        <div class="col-xs-8">
+                                                            {:build_select('doctor_id', $doctors, $activeDoctor['id'],
+                                                            ['id'=>'c-doctor_id','class'=>'form-control selectpicker'])}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2" id="unConfirmNum" unConfirmNum = "{$unConfirmNum}">
+                                        {if condition="!empty($unConfirmNum)"}
+                                        <label>您有{$unConfirmNum}条预约未确认</label>
+                                        {/if}
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="calendar"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="appointmentInfo" type="text/html">
+    <div class = "top">
+        <div class = "top_left">
+            <span class="name" ><%=name;%></span>
+            <span><%=project_name;%></span></br>
+            <span><%=statusFormat;%></span></br>
+            <span><%=telphone;%></span>
+        </div>
+        <div class = "top_right">
+            <span>预约医生</span><br>
+            <span><%=doctor_name;%></span>
+        </div>
+    </div>
+    <div class = "middle">
+        <div> <span>预约时间</span></div>
+        <div>
+            <span><%=Moment.unix(start_time).format("YYYY/MM/DD")%> </span>
+            <span><%=Moment.unix(start_time).format("HH:mm")%> </span>- <span><%=Moment.unix(end_time).format("HH:mm")%></span>
+        </div>
+    </div>
+</script>
+
+

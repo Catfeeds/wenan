@@ -1,0 +1,44 @@
+<form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group">
+        <label for="username" class="control-label col-xs-12 col-sm-2">{:__('Realname')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="username" name="row[username]" value="" data-rule="required;" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="phone" class="control-label col-xs-12 col-sm-2">{:__('Phone')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="phone" name="row[phone]" value="" data-rule="required;mobile" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Hospital')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_select('row[hos_id]', $hosList, null, ['class'=>'form-control selectpicker', 'id' => 'hos_id', 'data-rule'=>'required'])}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">科室:</label>
+        <div class="col-xs-12 col-sm-8 depart_id">
+            {:build_select('row[depart_id]', $departs, null, ['class'=>'form-control selectpicker', 'data-rule'=>'required'])}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Auth Role')}:</label>
+        <div class="col-xs-12 col-sm-8 group_id">
+            {:build_select('row[group_id]', $groupdata, null, ['class'=>'form-control selectpicker', 'data-rule'=>'required'])}
+        </div>
+    </div>
+    <div class="form-group">
+        <div style="margin: 10px 70px 10px 70px;border-top: 1px solid #9c818138;padding-top: 10px;">
+            权限说明：权限角色配置联系医馆管理员或admin账号拥有者修改。<br /><br />
+            备注：账户开通后，初始密码短信形式发送至用户手机上，请提示用户查收。
+        </div>
+    </div>
+    <div class="form-group hidden layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8" style="text-align: center;">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+        </div>
+    </div>
+</form>

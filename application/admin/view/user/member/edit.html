@@ -1,0 +1,117 @@
+
+<form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group col-sm-12">
+        <i class="fa fa-user"></i>
+        <label class="control-label">编辑会员</label>
+        <a href="/admin/user/member/detail/ids/{$row.id}"  class="" style="float: right" member_id = {$row.id}>返回会员详情<i class=""></i></a>
+    </div>
+    <div class="form-group col-sm-6">
+        <label for="c-name" class="control-label col-xs-12 col-sm-4">{:__('Name')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-name" data-rule="required;length(~10)" class="form-control able" name="row[name]" type="text" value="{$row.name}" disabled>
+        </div>
+    </div>
+    <div class="form-group col-sm-6">
+        <label for="c-birth_time" class="control-label col-xs-12 col-sm-4">{:__('birth_time')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-birth_time" data-rule="required" class="form-control datetimepicker able" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[birth_time]" type="text" value="{$row.birth_time?date('Y-m-d',$row.birth_time):''}" disabled>
+        </div>
+    </div>
+    <div class="form-group col-sm-6">
+        <label for="c-telphone" class="control-label col-xs-12 col-sm-4">{:__('Telphone')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-telphone" data-rule="required;mobile" class="form-control able" name="row[telphone]" type="text" value="{$row.telphone}" disabled>
+        </div>
+    </div>
+    <div class="form-group col-sm-6">
+        <label for="c-gender" class="control-label col-xs-12 col-sm-4">{:__('Gender')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_select('row[gender]', [1=>'男',2=>'女'], $row.gender, ['class'=>'form-control selectpicker able', 'data-rule'=>'required','disabled'=>'disabled'])}
+            <!--<input id="c-gender" data-rule="required" class="form-control" name="row[gender]" type="number" value="{$row.gender}">-->
+        </div>
+    </div>
+    <div class="form-group col-sm-6">
+        <label for="c-home_address" class="control-label col-xs-12 col-sm-4">{:__('Home_address')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-home_address" data-rule="" class="form-control able" name="row[home_address]" type="text" value="{$row.home_address}" disabled>
+        </div>
+    </div>
+    <div class="form-group col-sm-6">
+        <label for="c-medical_record_number" class="control-label col-xs-12 col-sm-4">{:__('Medical_record_number')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-medical_record_number" data-rule="" class="form-control" name="row[medical_record_number]" type="text" value="{$row.medical_record_number}" disabled>
+        </div>
+    </div>
+    <div class="form-group col-sm-6">
+        <label for="c-hos_id" class="control-label col-xs-12 col-sm-4">{:__('hos_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <label class="control-label">{$row.hosName}</label>
+        </div>
+    </div>
+    <!--<div class="form-group col-sm-6">-->
+        <!--<label for="c-integral" class="control-label col-xs-12 col-sm-4">{:__('Integral')}:</label>-->
+        <!--<div class="col-xs-12 col-sm-8">-->
+            <!--<input id="c-integral" data-rule="required" class="form-control" name="row[integral]" type="number" value="{$row.integral}">-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="form-group col-sm-12">
+        <i class="fa fa-id-card"></i>
+        <label class="control-label">会员卡</label>
+    </div>
+    <div class="form-group col-sm-6">
+        <label for="c-card_number" class="control-label col-xs-12 col-sm-4">{:__('Card_number')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <label class="control-label">{$row.card_number}</label>
+            <!--<input id="c-card_number" data-rule="required" class="form-control" name="row[card_number]" type="number" value="{$row.card_number}">-->
+        </div>
+    </div>
+    <!--<div class="form-group col-sm-6">-->
+        <!--<label for="c-project_discount" class="control-label col-xs-12 col-sm-4">{:__('Project_discount')}:</label>-->
+        <!--<div class="col-xs-12 col-sm-8">-->
+            <!--<input id="c-project_discount" data-rule="required" class="form-control" name="row[project_discount]" type="text" value="{$row.project_discount}">-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="form-group col-sm-6">
+        <label for="c-balance" class="control-label col-xs-12 col-sm-4">{:__('Balance')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-balance" data-rule="required" class="form-control" name="row[balance]" type="text" value="{$row.balance}" disabled>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <a href="javascript:;" class="btn btn-sm btn-success btn-pay {$row.status != 1 ? 'disabled': ''}" chargeInfo = {$row} ><i class=""></i> 充值</a>
+        </div>
+    </div>
+    <!--<div class="form-group col-sm-6">-->
+        <!--<label for="c-sale_discount" class="control-label col-xs-12 col-sm-4">{:__('Sale_discount')}:</label>-->
+        <!--<div class="col-xs-12 col-sm-8">-->
+            <!--<input id="c-sale_discount" data-rule="required" class="form-control" name="row[sale_discount]" type="text" value="{$row.sale_discount}">-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="form-group col-sm-6">
+        <label for="c-card_type" class="control-label col-xs-12 col-sm-4">{:__('Card_type')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_select('row[card_type]', $systemDic['CARD_TYPE'], $row.card_type, ['id'=>'c-card_type','class'=>'form-control selectpicker', 'data-rule'=>'required','disabled'=>'disabled'])}
+            <!--<select  id="c-card_type" data-rule="required" class="form-control selectpicker" multiple="" name="row[card_type]" disabled>-->
+                <!--{foreach name="systemDic['CARD_TYPE']" item="vo"}-->
+                <!--<option value="{$key}" {in name="key" value="$row.card_type"}selected{/in}>{$vo}</option>-->
+                <!--{/foreach}-->
+            <!--</select>-->
+            <!--<input id="c-card_type" data-rule="required" class="form-control" name="row[card_type]" type="number" value="{$row.card_type}">-->
+        </div>
+    </div>
+    <div class="form-group col-sm-6">
+        <label for="c-open_time" class="control-label col-xs-12 col-sm-4">{:__('Open_time')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-open_time" data-rule="required" class="form-control datetimepicker" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[open_time]" type="text" value="{:date('Y-m-d',$row.createtime)}" disabled>
+        </div>
+    </div>
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-4"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>
+
+<!--付款弹框-->
+{include file="user/chargeinfo/paytpl"/}

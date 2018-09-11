@@ -1,0 +1,71 @@
+<style>
+.form-input-5{
+    width: 45%;
+    float: left;
+}
+.form-group .bar{
+    float: left;
+    width: 10%;
+    text-align: center;
+    height: 31px;
+    line-height: 31px;
+}
+.bootstrap-datetimepicker-widget table td.spec, .bootstrap-datetimepicker-widget table td.spec:hover{
+    background-color: #b4b4b4;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+}
+</style>
+<form id="edit-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
+    <input type="hidden" id="hos_id" value="{$doctor.hos_id}"/>
+    <input type="hidden" id="doctor_id" value="{$doctor.id}"/>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">科室:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_select('depart_id', $depList, $doctor['depart_id'], ['class'=>'form-control selectpicker', 'id' => 'depart_id', 'data-rule'=>'required'])}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">医生:</label>
+        <div class="col-xs-12 col-sm-8 doctor_id">
+            {:build_select('doctor_id', $doctorList, $doctor['id'], ['class'=>'form-control selectpicker', 'data-rule'=>'required'])}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">工作日</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control datetimepicker form-input-5" name="start_day" id="start_day" value="{$regInfo.work_day}" data-rule="required;" />
+            <span class="bar">---</span>
+            <input type="text" class="form-control datetimepicker form-input-5" name="end_day" id="end_day" value="{$regInfo.work_day}" data-rule="required;" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">上午:</label>
+        <div class="col-xs-12 col-sm-8 morning">
+            {:build_select('morning', $regList['morning'], 0, ['class'=>'form-control selectpicker', 'id' => 'morning', 'data-rule'=>'required'])}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">下午:</label>
+        <div class="col-xs-12 col-sm-8 afternoon">
+            {:build_select('afternoon', $regList['afternoon'], 0, ['class'=>'form-control selectpicker', 'id' => 'afternoon', 'data-rule'=>'required'])}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">晚上:</label>
+        <div class="col-xs-12 col-sm-8 evening">
+            {:build_select('evening', $regList['evening'], 0, ['class'=>'form-control selectpicker', 'id' => 'evening', 'data-rule'=>'required'])}
+        </div>
+    </div>
+    <div class="form-group">
+        <div style="margin: 10px 70px 10px 70px;border-top: 1px solid #9c818138;padding-top: 10px;">
+            备注：请提前10小时完成当天挂号设置，如需修改当日挂号数量，仅可增加不能减少。
+        </div>
+    </div>
+    <div class="form-group hidden layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8" style="text-align: center;">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+        </div>
+    </div>
+</form>

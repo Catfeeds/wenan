@@ -1,0 +1,70 @@
+<form id="add-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+
+    <div class="form-group">
+        <label for="c-name" class="control-label col-xs-12 col-sm-2">{:__('Name')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-name" data-rule="required" class="form-control" name="row[name]" type="text" value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-gender" class="control-label col-xs-12 col-sm-2">{:__('Gender')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-gender" data-rule="required" class="form-control" name="row[gender]" type="text" value="1">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-age" class="control-label col-xs-12 col-sm-2">{:__('Age')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-age" data-rule="required" class="form-control" name="row[age]" type="text" value="0">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-medical_record_number" class="control-label col-xs-12 col-sm-2">{:__('Medical_record_number')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-medical_record_number" data-rule="required" class="form-control" name="row[medical_record_number]" type="text" value="0">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-telphone" class="control-label col-xs-12 col-sm-2">{:__('Telphone')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-telphone" data-rule="required;mobile" class="form-control" name="row[telphone]" type="text" value="0">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-home_address" class="control-label col-xs-12 col-sm-2">{:__('Home_address')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-home_address" data-rule="required" class="form-control" name="row[home_address]" type="text" value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-medical_status" class="control-label col-xs-12 col-sm-2">{:__('Medical_status')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-medical_status" data-rule="required" class="form-control" name="row[medical_status]" type="text" value="1">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-register_id" class="control-label col-xs-12 col-sm-2">{:__('Register_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-register_id" data-rule="required" data-source="register/index" class="form-control selectpage" name="row[register_id]" type="text" value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-appointment_id" class="control-label col-xs-12 col-sm-2">{:__('Appointment_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-appointment_id" data-rule="required" data-source="appointment/index" class="form-control selectpage" name="row[appointment_id]" type="text" value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-charge_info_id" class="control-label col-xs-12 col-sm-2">{:__('Charge_info_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-charge_info_id" data-rule="required" data-source="charge/info/index" class="form-control selectpage" name="row[charge_info_id]" type="text" value="">
+        </div>
+    </div>
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

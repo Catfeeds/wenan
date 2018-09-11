@@ -1,0 +1,47 @@
+<style>
+    .table>tbody>tr>td:nth-child(1){padding-left:50px;}
+    .table>tbody>tr>td.title{padding-left:8px;font-size: 12px;font-weight: bold;}
+    .title span{padding: 0 10px;}
+</style>
+<table class="table">
+        <tr>
+            <td class="title" colspan="2"><i class="fa fa-user"></i><span>挂号</span></td>
+        </tr>
+        <tr>
+            <td>就诊人</td>
+            <td>{$row.name}</td>
+        </tr>
+        <tr>
+            <td>手机号</td>
+            <td>{:$auth->check('user/patientvisitrecord/privacy') ? $row.telphone : substr($row.telphone,0,3).'****'.substr($row.telphone,7)}</td>
+        </tr>
+        <tr>
+            <td>性别</td>
+            <td>{$row.gender}</td>
+        </tr>
+        <tr>
+            <td>挂号时间</td>
+            <td>{:date('Y-m-d H:i',$row.createtime)}</td>
+        </tr>
+        <tr>
+            <td>序号</td>
+            <td>{$row.id}</td>
+        </tr>
+        <tr>
+            <td>科室</td>
+            <td>{$row.treatment_department}</td>
+        </tr>
+        <tr>
+            <td>医生</td>
+            <td>{$row.doctor_name}</td>
+        </tr>
+</table>
+<div class="hide layer-footer">
+    <label class="control-label col-xs-12 col-sm-2"></label>
+    <div class="col-xs-12 col-sm-4">
+        <!--<button class="btn btn-primary btn-embossed btn-cancel" registerId={$row.id}>取消挂号</button>-->
+        <button class="btn btn-primary btn-embossed btn-pay" chargeInfo={$row.chargeInfo}>支付</button>
+    </div>
+</div>
+<!--付款弹框-->
+{include file="user/chargeinfo/paytpl" /}

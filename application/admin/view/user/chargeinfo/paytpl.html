@@ -1,0 +1,68 @@
+<style>
+
+    /*支付弹框开始*/
+    .charge>span{display:inline-block;width: 30%;}
+
+    .pay-layer{font-size: 14px;}
+    .collect{padding: 20px 0;border-top: 2px solid;}
+    .collect>input{width: 40%;display: inline-block;padding: 0 10px;}
+    #mytab{margin: 10px 0 20px 0;}
+    #mytab.nav-pills > li.active > a{background-color: rgb(60, 141, 188);border: none;padding: 10px;}
+    .img-pay {text-align: center;}
+    .img-pay img{height: 100px;}
+    /*支付弹框结束*/
+</style>
+
+<!--付款弹框-->
+<script id="pay" type="text/html">
+    <div class="pay-layer">
+        <div class="">选择支付方式：</div>
+        <div>
+            <ul id = "mytab" class="nav nav-pills nav-justified">
+                <li class="active">
+                    <a href="#cash" data-toggle="tab" pay_way =1>现金支付</a>
+                </li>
+                <li>
+                    <a href="#zhifubao" data-toggle="tab" pay_way =2>支付宝</a>
+                </li>
+                <li>
+                    <a href="#weixin" data-toggle="tab" pay_way =3>微信支付</a>
+                </li>
+            </ul>
+        </div>
+        <div class="collect">
+            <%if(typeof(fee_id)!="undefined"){%>
+            <label class="radio-inline">付款金额：</label>
+            <input class="already_paid" type="text" value="<%=should_pay%>"/>
+            <%}else{%>
+            <label class="radio-inline">充值金额</label>
+            <input class="already_paid" type="text" value=""  />
+            <%}%>
+            <span>元</span>
+        </div>
+        <div class="" style="padding-bottom:20px;">
+            <label class="radio-inline">
+                卡内余额：<%=balance?balance:0;%> 元
+            </label>
+            <%if(typeof(fee_id)!="undefined"){%>
+            <label class="radio-inline">
+                <input type="checkbox" name="" id="iscard"  value="4" onclick=""> 卡内扣款
+            </label>
+            <%}%>
+        </div>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade in active" id="cash">
+            </div>
+            <div class="tab-pane fade" id="zhifubao">
+                <div class="img-pay">
+                    <img class=""  src="__CDN__/assets/img/zhifu/zhifubao.png" />
+                </div>
+            </div>
+            <div class="tab-pane fade" id="weixin">
+                <div class="img-pay">
+                    <img  class="" src="__CDN__/assets/img/zhifu/weixin.png" />
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

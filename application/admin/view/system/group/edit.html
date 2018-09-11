@@ -1,0 +1,29 @@
+<style>
+#treeview .jstree-leaf:not(:first-child) {
+    width: 95px;
+}
+</style>
+<form id="edit-form" class="form-horizontal form-ajax" role="form" method="POST" action="">
+    <input type="hidden" name="row[rules]" value="" />
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Permission')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <span class="text-muted"><input type="checkbox" name="" id="checkall" /> <label for="checkall"><small>{:__('Check all')}</small></label></span>
+            <span class="text-muted"><input type="checkbox" name="" id="expandall" /> <label for="expandall"><small>{:__('Expand all')}</small></label></span>
+
+            <div id="treeview"></div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div style="margin: 10px 70px 10px 70px;border-top: 1px solid #9c818138;padding-top: 10px;">
+            备注： 身份权限仅管理员可编辑管理。新身份添加默认无权限需管理添加权限后才能上线使用。<br />
+            当前身份无账号时，可删除，管理员账号不可删除。
+        </div>
+    </div>
+    <div class="form-group hidden layer-footer">
+        <label class="control-label col-xs-12 col-sm-2 col-xs-2"></label>
+        <div class="col-xs-12 col-sm-8" style="text-align: center;">
+            <button type="button" id="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+        </div>
+    </div>
+</form>

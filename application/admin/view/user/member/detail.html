@@ -1,0 +1,127 @@
+<style>
+    .table>tbody>tr>td:nth-child(1){padding-left:50px;}
+    .table>tbody>tr>td.title{padding-left:8px;font-size: 12px;font-weight: bold;}
+    .title span{padding: 0 10px;}
+
+    .patient_in_member>span{padding-right: 10px;}
+
+    .footer-btn{position:fixed;bottom:0;padding:5px 0;width: 100%;margin-left:-15px;text-align: center;background-color: #ecf0f1}
+</style>
+<table class="table">
+        <tr>
+            <td class="title"><i class="fa fa-user"></i><span>会员详情</span></td>
+            <td>
+                <a href="/admin/user/member/edit/ids/{$row.id}" class="btn btn-success btn-xs" style="float: right">查看详情<i class=""></i></a>
+            </td>
+        </tr>
+        <tr>
+            <td>会员名</td>
+            <td>{$row.name}</td>
+        </tr>
+        <tr>
+            <td>手机号</td>
+            <td>{:$auth->check('user/patientvisitRecord/privacy') ? $row.telphone : substr($row.telphone,0,3).'****'.substr($row.telphone,7)}</td>
+        </tr>
+        <!--<tr>-->
+            <!--<td>病历号</td>-->
+            <!--<td>{$row.medical_record_number}</td>-->
+        <!--</tr>-->
+        <tr>
+            <td>家庭住址</td>
+            <td>{$row.home_address}</td>
+        </tr>
+        <!--<tr>-->
+            <!--<td>积分</td>-->
+            <!--<td>{$row.integral}</td>-->
+        <!--</tr>-->
+        <tr>
+            <td>创建门店</td>
+            <td>{$row.hos_name}</td>
+        </tr>
+        <tr>
+            <td>卡号</td>
+            <td>{$row.card_number}</td>
+        </tr>
+        <tr>
+            <td>余额</td>
+            <td>{$row.balance}</td>
+        </tr>
+        <!--<tr>-->
+            <!--<td>会员卡类型</td>-->
+            <!--<td>{$row.card_type}</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td>项目折扣</td>-->
+            <!--<td>{$row.project_discount}/折</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td>卖品折扣</td>-->
+            <!--<td>{$row.sale_discount}/折</td>-->
+        <!--</tr>-->
+        <tr>
+            <td>开卡时间</td>
+            <td>{:date('Y-m-d',$row.createtime)}</td>
+        </tr>
+        <tr>
+            <td>最后消费时间</td>
+            <td>{$row.last_consumption_time?date('Y-m-d H:i',$row.last_consumption_time):'无'}</td>
+        </tr>
+        <tr>
+            <td  class="title"><i class="fa fa-user"></i><span>病人信息</span></td>
+            <td>
+                <a class="btn btn-success btn-xs {if $row.status != 1}disabled{/if}" href="/admin/user/patientinmember/add/memberId/{$row.id}"  class="" style="float: right">新增病人<i class=""></i></a>
+            </td>
+        </tr>
+
+        {foreach $row.patient_in_member as $vo}
+        <tr>
+            <td>
+                <div class="patient_in_member">
+                    <span>{:empty($systemDic['RELATION_TYPE'])?'':$systemDic['RELATION_TYPE'][$vo.relation]}</span>
+                    <span>{$vo.name}</span>
+                    <span>{$vo.birth_time>0?(date('Y')-date('Y',$vo.birth_time)+1).'岁':'无';}</span>
+                    <span>{$vo.gender == 1?'男':'女'}</span>
+                </div>
+            </td>
+            <td>
+                <a href="/admin/user/patientreturnrecord/index/patientInMemberId/{$vo.id}/chooseBtn/1" class="btn btn-success btn-xs">回访</a>
+                <a href="/admin/user/patientinmembercase/index/patientInMemberId/{$vo.id}/chooseBtn/1" class="btn btn-success btn-xs">病例记录</a>
+                <a href="/admin/user/patientvisitrecord/visit/patientInMemberId/{$vo.id}" class="btn btn-success btn-xs">来访记录</a>
+                {if $auth->check('user/chargeinfo/add')}
+                <a href="/admin/user/chargeinfo/add/patientInMemberId/{$vo.id}" class="btn btn-success btn-xs {if $row.status != 1}disabled{/if}">新增收费</a>
+                {/if}
+                <a href="javascript:;" class="btn btn-success btn-xs btn-appointment {if $row.status != 1}disabled{/if}" addtabs = "96" patient_in_member_id ={$vo.id}>新增预约</a>
+            </td>
+        </tr>
+        {/foreach}
+        <tr>
+            <td  class="title"><i class="fa fa-user"></i><span>消费记录</span></td>
+            <td><a href="/admin/user/Chargeinfo/index/ids/{$row.id}"  class="btn btn-success btn-xs" style="float: right">查看详情<i class=""></i></a></td>
+        </tr>
+        <tr>
+            <td>总消费次数</td>
+            <td>{$row.consumptionCount}</td>
+        </tr>
+        <tr>
+            <td>常用门店</td>
+            <td>{$row.commonHosName}</td>
+        </tr>
+        <tr>
+            <td  class="title"><i class="fa fa-user"></i><span>会员操作记录</span></td>
+            <td><a href="/admin/user/Memberoperatelog/index/ids/{$row.id}"  class="btn btn-success btn-xs" style="float: right">查看详情<i class=""></i></a></td>
+        </tr>
+        <tr>
+            <td>总操作次数</td>
+            <td>{$row.operateCount}</td>
+        </tr>
+        <tr>
+            <td>最近操作者</td>
+            <td>{$row.lastOperatorName}</td>
+        </tr>
+</table>
+<div class="hide layer-footer">
+    <label class="control-label col-xs-12 col-sm-2"></label>
+    <div class="col-xs-12 col-sm-8">
+        <button class="btn btn-primary btn-embossed btn-forbidden">{$row.status == 1?'禁用':'启用'}</button>
+    </div>
+</div>

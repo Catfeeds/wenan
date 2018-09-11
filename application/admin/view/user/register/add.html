@@ -1,0 +1,63 @@
+<form id="add-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group col-sm-12">
+        <i class="fa fa-user-plus"></i>
+        <label class="control-label">挂号</label>
+    </div>
+    <div class="form-group">
+        <label for="c-name" class="control-label col-xs-12 col-sm-2">{:__('Name')}:</label>
+        <div class="col-xs-12 col-sm-8 ui-front">
+            <input id="c-name" data-rule="required" class="form-control autocomplete" name="row[name]" type="text" value="">
+            <input id="c-member_id"  name="row[member_id]" type="hidden" value="">
+            <input id="c-patient_in_member_id"  name="row[patient_in_member_id]" type="hidden" value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-telphone" class="control-label col-xs-12 col-sm-2">{:__('Telphone')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-telphone" data-rule="required;mobile"  class="form-control" name="row[telphone]" type="text" value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-gender" class="control-label col-xs-12 col-sm-2">{:__('Gender')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_select('row[gender]', [1=>'男',2=>'女'], null, ['class'=>'form-control selectpicker','id'=>'c-gender', 'data-rule'=>'required'])}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-register_time" class="control-label col-xs-12 col-sm-2">{:__('Register_time')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-register_time" data-rule="required" class="form-control datetimepicker"  data-date-format="YYYY-MM-DD" data-use-current="true" name="row[register_time]" type="text" value="{:date('Y-m-d')}">
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            {:build_select('row[stage]', [1=>"上午",2=>'下午',3=>'晚上'], null, ['class'=>'form-control selectpicker','id'=>"c-stage", 'data-rule'=>'required'])}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-treatment_department" class="control-label col-xs-12 col-sm-2">{:__('Treatment_department')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_select('row[treatment_department]', $treatmentDepartment, null, ['class'=>'form-control selectpicker','id'=>"c-treatment_department", 'data-rule'=>'required'])}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-doctor_id" class="control-label col-xs-12 col-sm-2">{:__('Doctor_name')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_select('row[doctor_id]', $doctor, null, ['class'=>'form-control selectpicker','id'=>"c-doctor_id", 'data-rule'=>'required'])}
+            <input id="c-doctor_name"   name="row[doctor_name]" type="hidden" value="{:current($doctor)}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-treatment_type" class="control-label col-xs-12 col-sm-2">当前剩余号:</label>
+        <div class="col-xs-12 col-sm-4">
+            <label  class="control-label col-xs-12 col-sm-2 remainderRegister">{$remainderRegister?$remainderRegister:"0"}</label>
+            <input type="hidden" id="c-remainder_register" name="row[remainder_register]" value="{$remainderRegister?$remainderRegister:'0'}">
+        </div>
+    </div>
+
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>
